@@ -1,0 +1,150 @@
+<?php 
+include('owner_header.php');
+$add_staff=new owner;
+
+$all_staffs=$add_staff->show_all_staff_type();
+
+
+?>
+<style>
+.dataTables_filter{
+    float:right;
+}
+#datatable_wrapper{
+  margin-bottom: 15px;
+}
+</style>
+    <div class="container-fluid mt--7 " style="height: auto;">
+      
+      <div class="row mt-5" >
+        <div class="col-12 mb-5 ">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center" >
+                <div class="col">
+                  <h3 class="mb-0">ADD STAFF</h3>
+                </div>
+              </div>
+            </div>
+            <!-- Your Content Start -->
+            <div class="container mt-3 mb-7" >
+            <div class="row">
+              <div class="col-12" >
+                <div class="card bg-secondary shadow">
+                  <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                      <div class="col-8">
+                        <h3 class="mb-0">Staff Information</h3>
+                      </div>
+                      
+                    </div>    
+                  </div>
+                  <div class="card-body" >
+                    <form id="add_staff" method="post" enctype="multipart/form-data">
+                      
+                      <div class="pl-lg-4">
+                        <div class="row">
+
+                          <div class="col-12">
+                            <div class="form-group focused">
+                              <label class="form-control-label" for="input-username">Name</label>
+                              <input type="text" name="name" class="form-control form-control-alternative" placeholder="Name" >
+                            </div>
+                          </div>
+
+                          <div class="col-6">
+                            <div class="form-group focused">
+                              <label class="form-control-label" for="input-username">Mobile Number</label>
+                              <input type="text" name="mobile" maxlength="10" class="form-control form-control-alternative" placeholder="Mobile Number" >
+                            </div>
+                          </div>
+
+                          <div class="col-6">
+                            <div class="form-group focused">
+                              <label class="form-control-label" for="input-username">Address</label>
+                              <textarea class="form-control form-control-alternative" name="address" placeholder="Address" cols="5"></textarea>
+                            </div>
+                          </div>
+
+                          <div class="col-6">
+                            <div class="form-group focused">
+                              <label class="form-control-label" for="input-first-name">Staff Type</label>
+                              <select class="form-control"  name="staff_type">
+                                <option value="">Select Staff Type</option>
+                                <?php foreach ($all_staffs as $all_staff) {
+                                ?>
+                                <option value="<?php echo $all_staff['name']; ?>"><?php echo $all_staff['name']; ?></option>
+
+                                <?php
+                                } ?>
+                                
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-6">
+                            <div class="form-group focused">
+                              <label class="form-control-label" for="input-username">Joining Date</label>
+                              <input type="date" name="joining_date" class="form-control form-control-alternative" placeholder="joining_date" >
+                            </div>
+                          </div>       
+                          
+   
+                          
+                        </div>
+                        
+                      </div>
+                      
+                      <div class="pl-lg-4 mt-4">
+                      
+                        <div class="row">
+                          <div class="col text-center">
+                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                          
+                        </div>
+                      </div>
+         
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            </div>
+
+            <!-- Your Content End -->
+
+
+            
+          </div>
+        </div>
+      </div>
+    </div>  
+      <!-- Footer -->
+
+
+    
+<?php 
+include('footer.php');
+?>
+
+
+
+
+<!-- <script src="plugins/validate_js/jquery-2.1.3.min.js"></script> -->
+<script src="plugins/validate_js/jquery.validate.min.js"></script>
+<script src="plugins/validate_js/additional-methods.min.js"></script>
+<script src="plugins/validate_js/validate.js"></script>
+
+
+
+<?php 
+if (isset($_POST['submit'])) {
+$add_staff->add_staff($_POST['name'],$_SESSION['owner'],$_POST['mobile'],$_POST['staff_type'],$_POST['address'],$_POST['joining_date']);
+}
+
+
+ ?>
+
+
